@@ -12,14 +12,16 @@ function init() {
     setInterval(printClimateData, 5000);
 }
 
+insertToDatabase();
+
 function printClimateData() {
     fetch('/temperature')
         .then(response => response.json())
-        .then(response => { 
+        .then(response => {
             tempText.innerHTML = response + ' °C';
             document.getElementById('display').classList.remove('loading');
             document.getElementById('display').classList.add('displaying');
-         });
+        });
 
     fetch('/humidity')
         .then(response => response.json())
@@ -27,7 +29,7 @@ function printClimateData() {
             humidText.innerHTML = response + ' %';
             document.getElementById('display').classList.remove('loading');
             document.getElementById('display').classList.add('displaying');
-    });
+        });
 }
 
 

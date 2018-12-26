@@ -26,9 +26,9 @@ function init() {
     client.subscribe('humidity');
     client.on('message', function (topic, message, packet) {
       if (topic == "temperature")
-        temperature = message;
+        temperature = message.toString();
       if (topic == "humidity")
-        humidity = message;
+        humidity = message.toString();
     });
   });
 }
@@ -37,6 +37,7 @@ init();
 
 module.exports = function (app, db) {
   app.get('/temperature', (req, res) => {
+    console.log(temperature)
     res.send(temperature);
   });
   app.get('/humidity', (req, res) => {
@@ -45,6 +46,16 @@ module.exports = function (app, db) {
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../../../client/index.html'))
   })
+  setInterval(() => { //This should be moved?
+    if (temperature != "notset") {
+      var temperatureData = { type: 'temperature', value: temperature, time: Date.now() }
+      db.collection('temperature').insert(temperatureData)
+    }
+    if (humidity != "notset") {
+      var humidityData = { type: 'humidity', value: humidity, time: Date.now() }
+      db.collection('humidity').insert(humidityData)
+    }
+  }, 1000 * 60 * 20); //Every 20 min
 };
 
 
