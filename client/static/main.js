@@ -17,12 +17,17 @@ function printClimateData() {
         .then(response => response.json())
         .then(response => { 
             tempText.innerHTML = response + ' °C';
-            document.getElementById('loading').classList.remove('lds-ring');
+            document.getElementById('display').classList.remove('loading');
+            document.getElementById('display').classList.add('displaying');
          });
 
     fetch('/humidity')
         .then(response => response.json())
-        .then(response => humidText.innerHTML = response + ' %');
+        .then(response => {
+            humidText.innerHTML = response + ' %';
+            document.getElementById('display').classList.remove('loading');
+            document.getElementById('display').classList.add('displaying');
+    });
 }
 
 
