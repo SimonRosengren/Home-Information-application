@@ -43,7 +43,7 @@ module.exports = function (app, db) {
     res.send(humidity);
   });
   app.get('/', (req, res) => {
-    //res.sendFile(path.join(__dirname+'../../client/index.html'))
+    res.sendFile(path.join(__dirname, '../../../client/index.html'))
   })
 };
 
