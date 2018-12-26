@@ -15,11 +15,14 @@ function init() {
 function printClimateData() {
     fetch('/temperature')
         .then(response => response.json())
-        .then(response => tempText.innerHTML = response);
+        .then(response => { 
+            tempText.innerHTML = response + ' °C';
+            document.getElementById('loading').classList.remove('lds-ring');
+         });
 
     fetch('/humidity')
         .then(response => response.json())
-        .then(response => humidText.innerHTML = response);
+        .then(response => humidText.innerHTML = response + ' %');
 }
 
 
