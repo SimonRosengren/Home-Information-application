@@ -1,5 +1,6 @@
 
 var mqtt = require('mqtt');
+var path = require('path');
 var temperature = "notset";
 var humidity = "notset";
 var options = {
@@ -41,6 +42,9 @@ module.exports = function (app, db) {
   app.get('/humidity', (req, res) => {
     res.send(humidity);
   });
+  app.get('/', (req, res) => {
+    //res.sendFile(path.join(__dirname+'../../client/index.html'))
+  })
 };
 
 

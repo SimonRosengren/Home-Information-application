@@ -6,4 +6,5 @@ require('./server/app/routes')(app, {});
 
 app.listen((process.env.PORT || 5000), () => {
   console.log('We are live on ' + port);
+  file.serve()
 });
