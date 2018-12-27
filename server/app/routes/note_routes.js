@@ -53,9 +53,9 @@ module.exports = function (app, db) {
     }
     if (humidity != "notset") {
       var humidityData = { type: 'humidity', value: humidity, time: Date.now() }
-      db.collection('humidity').insert(humidityData)
+      db.collection('humidity').insertOne(humidityData)
     }
-  }, 1000 * 10); //Every 20 min
+  }, 1000 * 60 * 10); //Every 10 min
 };
 
 

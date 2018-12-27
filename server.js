@@ -10,9 +10,9 @@ var db = require('./config/db');
 app.use(express.static(path.join(__dirname, '/client')));
 
 MongoClient.connect(db.url, (err, database) => {
-  if (err) return console.log(err)
-  db = database.db("note-api");
-  require('./server/app/routes')(app, database);
+  if (err) console.log(err)
+  db = database.db(); 
+  require('./server/app/routes')(app, db);
   app.listen((process.env.PORT || port), () => {
     console.log('We are live on ' + port);
   });
