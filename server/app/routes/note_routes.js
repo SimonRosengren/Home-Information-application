@@ -55,7 +55,7 @@ module.exports = function (app, db) {
       var humidityData = { type: 'humidity', value: humidity, time: Date.now() }
       db.collection('humidity').insert(humidityData)
     }
-  }, 1000 * 60 * 20); //Every 20 min
+  }, 1000 * 10); //Every 20 min
 };
 
 
